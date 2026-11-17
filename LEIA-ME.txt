@@ -1,0 +1,46 @@
+VENOBLO — versão otimizada
+
+Publique index.html e a pasta assets juntos, mantendo os caminhos relativos.
+Não é necessário instalar dependências ou executar uma etapa de build.
+
+Alterações:
+- CSS e JavaScript separados do HTML para permitir cache independente.
+- Cinco máscaras de ícones extraídas e deduplicadas, sem alterar seus pixels.
+- Textura 3D reutiliza o arquivo face-grid.png original, idêntico ao embutido.
+- Eventos de rolagem agrupados em no máximo uma atualização por frame.
+- Largura do letreiro armazenada e atualizada via ResizeObserver.
+- Ondas em modo de movimento reduzido calculadas uma única vez.
+- Decodificação assíncrona das imagens e carregamento tardio da primeira foto do carrossel.
+- Pré-carregamento da textura da primeira tela.
+
+Validação local em Chromium, em 1440 e 390 pixels:
+- Nenhum erro JavaScript ou resposta HTTP >=400.
+- Menu móvel abre e fecha com Escape.
+- Botão de próxima foto altera a legenda do carrossel.
+- Todas as seções mantêm as mesmas dimensões do original nos dois tamanhos.
+- JavaScript aprovado por node --check.
+
+HTML: 762.540 -> 101.443 bytes (-86,7%).
+Pacote descompactado, sem este documento: 2.860.946 -> 2.798.196 bytes (-2,2%).
+A redução do HTML não representa a mesma redução no download total: os recursos foram externalizados.
+Fotos e vídeo mantidos sem recompressão. Nenhuma mudança deliberada de layout ou conteúdo.
+
+A configuração de cache e compressão Brotli/Gzip deve ser feita na hospedagem.
+Não foi realizada publicação nem medição de desempenho do domínio em produção.
+
+ATUALIZAÇÃO MOBILE
+- Agendamento compartilhado das animações, suspenso fora da tela e em abas ocultas.
+- 3D em dispositivos de toque com resolução limitada a 1x e alvo de 30 FPS.
+- Valores invariantes da animação 3D pré-calculados.
+- Sem raycast de movimento do mouse em dispositivos de toque.
+- Textura de grão estática no mobile, mantendo sua presença visual.
+- Vídeo pausado ao ocultar a aba; reprodução automática respeita economia de dados.
+- Cancelamento de gesto vertical não troca a foto do carrossel.
+- Tempo acumulado do carrossel limitado para evitar saltos ao voltar à tela.
+- Corrigido transbordamento horizontal na raiz.
+
+Validação em Chromium: menu, próximo/anterior, cancelamento de gesto e ausência
+de erros JavaScript nas larguras 360, 390, 768 e 1440 px.
+Sem transbordamento horizontal nas quatro larguras. Inicialização do 3D
+confirmada em emulação móvel de 360 px. Não representa teste em aparelho físico
+nem garantia de FPS constante.
