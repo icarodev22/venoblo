@@ -408,3 +408,12 @@ html{overflow-x:clip}
  .car__track{will-change:transform}
 }
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+/* Mobile: one opening screen, without the desktop scroll-animation runway. */
+@media (max-width:720px){
+ .hero{height:100vh;height:100svh}
+ .hero__stage{position:relative;top:auto;height:100%;--p:0!important}
+ .hero__fallback{display:block;object-fit:contain}
+ .face-rendered:not(.no-webgl) .hero__fallback{display:none}
+ .js .hero__logo{clip-path:inset(0);transition:none}
+}
